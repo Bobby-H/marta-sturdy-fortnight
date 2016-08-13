@@ -2,29 +2,54 @@
 
 <h2>You are currently standing at ...</h2>
 
-<p><%= @location.my_location %></p>
+<h3><%= @location.my_location %></h3>
 
 <h3>The closest buses are:</h3>
 
 <% if @bus_count == 0 %>
   <p>There are no buses around you.</p>
 <% end %>
-<% @buses_nearby.each do |bus| %>
+<% @buses_nearby.each_with_index do |bus, index| %>
   <p>
     <strong>Route</strong>:<%= bus["ROUTE"] %> <br>
     <strong>Vehicle</strong>:<%= bus["VEHICLE"] %> <br>
     <strong>Next Stop</strong>:<%= bus["TIMEPOINT"] %> <br>
   </p>
-<% end %>
-<p>
-  <strong>Address:</strong>
-  <%= @location.address%>
-</p>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    function initialize() {
+      var myLatlng = new google.maps.LatLng(<%= @location.latitude %>.<%= @location.longitude %>);
+      var busLatLng = new google.maps.LatLng(<%= bus["LATITUDE"] %>, <%= bus["LONGITUDE"] %>);
 
-<p>
-  <strong>City:</strong>
-  <%= @location.city %>
-</p>
-<h1><%= @location.address %></h1>
-<p><%= @location.latitude%>, <%= @location.longitude %></p>
-<%= link_to 'Actually, i\'m at ...', edit_location_path(@location) %> |
+      var mapOptions = {
+        center: myLatlng,
+        zoom: 13
+      };
+
+      var map = new google.maps.Map(document.getElementById("map-canvas<%= index %>"), mapOptions);
+
+      var contentString = "<img src='http://www.motorbussociety.org/conventn/01spr/MARTA%203163.jpg' style='width:50px;height:50px;' />";
+
+      var infoWindow = new google.maps.InfoWindow({
+        content: contentString
+      });
+
+      var marker = new google.maps.Marker({
+        position: busLatlng,
+        map: map,
+        animation: google.maps.Animation.DROP,
+        title: 'Capital'
+      });
+
+      marker.addListener('click', function(){
+        infoWindow.open(map, marker);
+      });
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+
+  });
+  </script>
+  <div class="bus-map" id="map-canvas<%= index %>"></div>
+<% end %>
+
+<h3><%= link_to 'Actually, i\'m at ...', edit_location_path(@location) %></h3>
