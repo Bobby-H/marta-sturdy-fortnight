@@ -23,6 +23,12 @@ $(document).ready(function() {
       scrollwheel: false
       };
 
+      var marker = new google.maps.Marker({
+        position: myLatlng,
+        map: map,
+        title: 'Capital'
+      });
+
       var map = new google.maps.Map(document.getElementById('map-canvas'),
                 mapOptions);
     }
