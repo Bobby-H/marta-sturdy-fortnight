@@ -9,7 +9,7 @@
 <% if @bus_count == 0 %>
   <p>There are no buses around you.</p>
 <% end %>
-<% @buses_nearby.each do |bus| %>
+<% @buses_nearby.each_with_index do |bus, index| %>
   <p>
     <strong>Route</strong>:<%= bus["ROUTE"] %> <br>
     <strong>Vehicle</strong>:<%= bus["VEHICLE"] %> <br>
@@ -27,7 +27,7 @@
 
       var map = new google.maps.Map(document.getElementById("map-canvas<%= index %>"), mapOptions);
 
-      var contentString = "<img src="http://www.motorbussociety.org/conventn/01spr/MARTA%203163.jpg" style='width:50px;height:50px;' />";
+      var contentString = "<img src='http://www.motorbussociety.org/conventn/01spr/MARTA%203163.jpg' style='width:50px;height:50px;' />";
 
       var infoWindow = new google.maps.InfoWindow({
         content: contentString
@@ -40,7 +40,7 @@
         title: 'Capital'
       });
 
-      google.maps.event.addEventListener(marker, 'click', function(){
+      marker.addListener('click', function(){
         infoWindow.open(map, marker);
       });
     }
