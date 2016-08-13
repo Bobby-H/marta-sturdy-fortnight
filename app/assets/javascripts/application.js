@@ -13,25 +13,39 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
-$(document).ready(function() {
-  var myLatlng = new google.maps.LatLng( 33.749028, -84.388083 );
+$(document).ready(function (){
 
     function initialize() {
+      var myLatLng = new google.maps.LatLng(33.756301, -84.388521);
       var mapOptions = {
-      center: myLatlng,
-      zoom: 15,
-      scrollwheel: false
+      center: myLatLng,
+      zoom: 8
       };
 
+      var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+      var image = "<%= asset_path 'peach.png'%>"
       var marker = new google.maps.Marker({
-        position: myLatlng,
+        position: myLatLng,
         map: map,
-        title: 'Capital'
+        title: "Hello world",
+        animation: google.maps.Animation.DROP
+      });
+      var contentString = '<h2>Atlanta</h2>'+'<p>SouthernPlayalisticCadillacFunkyMusic</p>';
+
+      var infowindow = new google.maps.InfoWindow({
+        content: contentString
       });
 
-      var map = new google.maps.Map(document.getElementById('map-canvas'),
-                mapOptions);
+      google.maps.event.addListener(marker, 'click', function() {
+         infowindow.open(map,marker);
+      });
     }
 
     google.maps.event.addDomListener(window, 'load', initialize);
+
+    var mapOptions = {
+      center: { lat: -36.848738, lng: 174.752173},
+      zoom: 15,
+      scrollwheel: false
+    }
 });
