@@ -14,10 +14,11 @@
 //= require jquery_ujs
 //= require_tree .
 $(document).ready(function() {
+  var myLatlng = new google.maps.LatLng( 33.749028, -84.388083 );
 
     function initialize() {
       var mapOptions = {
-      center: { lat: 33.749028, lng: -84.388083},
+      center: myLatlng,
       zoom: 15,
       scrollwheel: false
       };
