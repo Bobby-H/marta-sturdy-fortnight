@@ -1,7 +1,12 @@
 source 'https://rubygems.org'
 
+#to use bootstrap components to style gmaps
+gem 'bootstrap-sass', '~> 3.3.6'
+#to hide keys
 gem 'figaro'
+#so we can work with lat & lng coordinates
 gem 'geocoder'
+#for pulling in Marta api
 gem 'httparty'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
