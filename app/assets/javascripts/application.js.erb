@@ -16,7 +16,7 @@
 $(document).ready(function (){
 
     function initialize() {
-      var myLatLng = new google.maps.LatLng(33.756301, -84.388521);
+      var myLatLng = new google.maps.LatLng(latitude, longitude);
       var mapOptions = {
       center: myLatLng,
       zoom: 13
@@ -30,7 +30,7 @@ $(document).ready(function (){
         icon: image,
         animation: google.maps.Animation.DROP
       });
-      var contentString = '<h2>Atlanta</h2>'+'<p>SouthernPlayalisticCadillacFunkyMusic</p>';
+      var contentString = '<h2>'+ my_location +'</h2>';
 
       var infowindow = new google.maps.InfoWindow({
         content: contentString

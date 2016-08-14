@@ -20,7 +20,7 @@
       address = '<%= j @location.address %>';
     <% end %>
   </p>
-  <script type="text/javascript">
+  <script>
     function initialize() {
       var myLatlng = new google.maps.LatLng(<%= @location.latitude %>, <%= @location.longitude %>);
       var busLatLng = new google.maps.LatLng(<%= bus["LATITUDE"] %>, <%= bus["LONGITUDE"] %>);
