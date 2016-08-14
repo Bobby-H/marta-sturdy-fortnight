@@ -16,10 +16,10 @@
 $(document).ready(function (){
 
     function initialize() {
-      var myLatLng = new google.maps.LatLng(33.756301, -84.388521);
+      var myLatLng = new google.maps.LatLng(latitude, longitude);
       var mapOptions = {
       center: myLatLng,
-      zoom: 8
+      zoom: 13
       };
 
       var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
@@ -27,10 +27,10 @@ $(document).ready(function (){
       var marker = new google.maps.Marker({
         position: myLatLng,
         map: map,
-        title: "Hello world",
+        icon: image,
         animation: google.maps.Animation.DROP
       });
-      var contentString = '<h2>Atlanta</h2>'+'<p>SouthernPlayalisticCadillacFunkyMusic</p>';
+      var contentString = '<h2>'+ my_location +'</h2>';
 
       var infowindow = new google.maps.InfoWindow({
         content: contentString
